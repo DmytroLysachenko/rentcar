@@ -1,0 +1,35 @@
+.div {
+  display: flex;
+
+  width: 320px;
+}
+
+.input {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+  color: #121417;
+  padding: 14px 24px;
+  width: 50%;
+  background-color: #f7f7fb;
+  &::placeholder {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 111%;
+    color: #121417;
+    opacity: unset;
+  }
+}
+
+.left {
+  border-right: 1px solid rgba(138, 138, 137, 0.2);
+  border-radius: 14px 0 0 14px;
+}
+.right {
+  border-radius: 0 14px 14px 0;
+}
