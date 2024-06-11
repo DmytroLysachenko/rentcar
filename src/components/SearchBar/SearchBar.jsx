@@ -1,7 +1,10 @@
+import { useDispatch } from 'react-redux';
+import { perHour } from '../../helpers/perHour';
 import { AdjInput } from '../AdjInput/AdjInput';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import s from './SearchBar.module.css';
+import { fetchFilteredThunk } from '../../redux/catalog/operations';
 
 const brands = [
   'Buick',
@@ -28,11 +31,24 @@ const brands = [
   'Land',
 ];
 
-const perHour = ['30', '40', '50', '60', '70', '80', '90', '100'];
-
-export const SearchBar = () => {
+export const SearchBar = ({ setLastPage }) => {
+  const dispatch = useDispatch();
   return (
-    <form className={s.form}>
+    <form
+      className={s.form}
+      onSubmit={(event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const filterValues = {
+          brand: formData.get('brand'),
+          price: formData.get('perHour'),
+          min: formData.get('min'),
+          max: formData.get('max'),
+        };
+        dispatch(fetchFilteredThunk(filterValues));
+        setLastPage(false);
+      }}
+    >
       <Input
         title="Car brand"
         placeholder="Enter the text"
@@ -43,7 +59,7 @@ export const SearchBar = () => {
       <Input
         title="Price / 1 hour"
         placeholder="To $"
-        options={perHour}
+        options={perHour()}
         name="perHour"
         width="125px"
       />

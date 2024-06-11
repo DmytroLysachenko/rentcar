@@ -1,19 +1,23 @@
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { List } from '../../components/List/List';
-import { useSelector } from 'react-redux';
-import { selectCatalog } from '../../redux/catalog/selectors';
 
 import { LoadMore } from '../../components/LoadMore/LoadMore';
-export const Catalog = ({ openModal }) => {
-  const cars = useSelector(selectCatalog);
+
+export const Catalog = ({
+  openModal,
+  nextPage,
+  cars,
+  isLastPage,
+  setLastPage,
+}) => {
   return (
     <>
-      <SearchBar />
+      <SearchBar setLastPage={setLastPage} />
       <List
         openModal={openModal}
         cars={cars}
       />
-      <LoadMore />
+      {!isLastPage && <LoadMore nextPage={nextPage} />}
     </>
   );
 };

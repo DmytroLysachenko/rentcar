@@ -1,5 +1,3 @@
-import { useDispatch } from 'react-redux';
-import { fetchPageThunk } from '../../redux/catalog/operations';
 import { useEffect, useState } from 'react';
 import { Layout } from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
@@ -8,6 +6,10 @@ import { Favorites } from '../../pages/Favorites/Favorites';
 import { Catalog } from '../../pages/Catalog/Catalog';
 import Modal from '../Modal/Modal';
 import { ModalCar } from '../ModalCar/ModalCar';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCatalog } from '../../redux/catalog/selectors';
+import { fetchPageThunk } from '../../redux/catalog/operations';
+import { mockAPI } from '../../helpers/mockAPI';
 
 export const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -19,9 +21,25 @@ export const App = () => {
   };
 
   const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLastPage, setLastPage] = useState(false);
+  const cars = useSelector(selectCatalog);
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const pageCheck = async (page) => {
+    const { data } = await mockAPI.get('/adverts', {
+      params: { p: page, l: 12 },
+    });
+    const nextPage = !(data.length > 0);
+    setLastPage(nextPage);
+  };
+
   useEffect(() => {
-    dispatch(fetchPageThunk(1));
-  }, [dispatch]);
+    dispatch(fetchPageThunk(currentPage));
+    pageCheck(currentPage + 1);
+  }, [currentPage, dispatch]);
 
   return (
     <>
@@ -38,7 +56,15 @@ export const App = () => {
           />
           <Route
             path="/catalog"
-            element={<Catalog openModal={openModal} />}
+            element={
+              <Catalog
+                cars={cars}
+                isLastPage={isLastPage}
+                nextPage={nextPage}
+                openModal={openModal}
+                setLastPage={setLastPage}
+              />
+            }
           />
           <Route
             path="/favorites"

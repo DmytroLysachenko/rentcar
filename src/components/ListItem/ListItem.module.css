@@ -3,6 +3,7 @@
   width: 274px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .img {
   border-radius: 14px;
@@ -57,4 +58,19 @@
 
 .description_wrapper {
   margin-bottom: 28px;
+}
+.heart_button {
+  display: flex;
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: fit-content;
+  background-color: transparent;
+}
+.svg {
+  width: 18px;
+  height: 18px;
 }

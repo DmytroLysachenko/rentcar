@@ -14,6 +14,8 @@ export const AdjInput = ({ width, title }) => {
           className={clsx(s.input, s.left)}
           type="number"
           placeholder="From"
+          name="min"
+          id="min"
           min="0"
           max="1000"
         />
@@ -21,6 +23,8 @@ export const AdjInput = ({ width, title }) => {
           className={clsx(s.input, s.right)}
           type="number"
           placeholder="To"
+          name="max"
+          id="max"
           min="0"
           max="1000"
         />

@@ -1,11 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import {
-  fetchMarkFilteredThunk,
-  fetchMileFilteredThunk,
-  fetchPageThunk,
-  fetchPriceFilteredThunk,
-} from './operations';
+import { fetchFilteredThunk, fetchPageThunk } from './operations';
 
 const initialState = {
   items: [],
@@ -29,20 +24,16 @@ const catalogSlice = createSlice({
       state.favoritesId.push(payload);
     },
     removeFavoriteCar(state, { payload }) {
-      state.favoritesId.push(payload);
+      state.favoritesId = state.favoritesId.filter((id) => id !== payload);
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
-        state.items = [...payload];
+        state.items = [...state.items, ...payload];
       })
       .addMatcher(
-        isAnyOf(
-          fetchMarkFilteredThunk.fulfilled,
-          fetchPriceFilteredThunk.fulfilled,
-          fetchMileFilteredThunk.fulfilled
-        ),
+        isAnyOf(fetchFilteredThunk.fulfilled),
         (state, { payload }) => {
           state.items = [...payload];
         }
@@ -64,4 +55,9 @@ const catalogSlice = createSlice({
 });
 
 export const catalogReducer = catalogSlice.reducer;
-export const { addCurrentCar, removeCurrentCar } = catalogSlice.actions;
+export const {
+  addCurrentCar,
+  removeCurrentCar,
+  addFavoriteCar,
+  removeFavoriteCar,
+} = catalogSlice.actions;

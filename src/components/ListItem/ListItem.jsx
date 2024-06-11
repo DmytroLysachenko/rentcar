@@ -1,8 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import s from './ListItem.module.css';
-import { addCurrentCar } from '../../redux/catalog/slice';
-export const ListItem = ({ car, openModal }) => {
+import {
+  addCurrentCar,
+  addFavoriteCar,
+  removeFavoriteCar,
+} from '../../redux/catalog/slice';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+
+export const ListItem = ({ car, isLiked, openModal }) => {
   const [city, country] = car.address.split(',').slice(1);
   const description = [
     city,
@@ -12,13 +18,36 @@ export const ListItem = ({ car, openModal }) => {
     car.id,
     car.functionalities[0],
   ];
+
   const dispatch = useDispatch();
   const onClick = () => {
     dispatch(addCurrentCar(car));
     openModal();
   };
+  const onHeartBtn = () => {
+    isLiked
+      ? dispatch(removeFavoriteCar(car.id))
+      : dispatch(addFavoriteCar(car.id));
+  };
   return (
     <li className={s.item}>
+      <button
+        className={s.heart_button}
+        type="button"
+        onClick={() => onHeartBtn()}
+      >
+        {isLiked ? (
+          <FaHeart
+            color="#3470ff"
+            className={s.svg}
+          />
+        ) : (
+          <FaRegHeart
+            color="rgba(255, 255, 255, 0.8)"
+            className={s.svg}
+          />
+        )}
+      </button>
       <img
         className={s.img}
         src={car.img}
