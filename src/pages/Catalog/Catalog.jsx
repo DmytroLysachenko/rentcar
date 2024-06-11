@@ -4,12 +4,15 @@ import { useSelector } from 'react-redux';
 import { selectCatalog } from '../../redux/catalog/selectors';
 
 import { LoadMore } from '../../components/LoadMore/LoadMore';
-export const Catalog = () => {
+export const Catalog = ({ openModal }) => {
   const cars = useSelector(selectCatalog);
   return (
     <>
       <SearchBar />
-      <List cars={cars} />
+      <List
+        openModal={openModal}
+        cars={cars}
+      />
       <LoadMore />
     </>
   );

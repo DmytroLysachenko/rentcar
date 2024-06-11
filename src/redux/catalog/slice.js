@@ -1,12 +1,18 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { fetchPageThunk } from './operations';
+import {
+  fetchMarkFilteredThunk,
+  fetchMileFilteredThunk,
+  fetchPageThunk,
+  fetchPriceFilteredThunk,
+} from './operations';
 
 const initialState = {
   items: [],
   loading: false,
   error: null,
   currentCar: null,
+  favoritesId: [],
 };
 
 const catalogSlice = createSlice({
@@ -19,12 +25,29 @@ const catalogSlice = createSlice({
     removeCurrentCar(state) {
       state.currentCar = null;
     },
+    addFavoriteCar(state, { payload }) {
+      state.favoritesId.push(payload);
+    },
+    removeFavoriteCar(state, { payload }) {
+      state.favoritesId.push(payload);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
         state.items = [...payload];
       })
+      .addMatcher(
+        isAnyOf(
+          fetchMarkFilteredThunk.fulfilled,
+          fetchPriceFilteredThunk.fulfilled,
+          fetchMileFilteredThunk.fulfilled
+        ),
+        (state, { payload }) => {
+          state.items = [...payload];
+        }
+      )
+
       .addMatcher(isAnyOf(fetchPageThunk.pending), (state) => {
         state.loading = true;
         state.error = null;

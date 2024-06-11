@@ -1,6 +1,8 @@
+import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 import s from './ListItem.module.css';
-export const ListItem = ({ car }) => {
+import { addCurrentCar } from '../../redux/catalog/slice';
+export const ListItem = ({ car, openModal }) => {
   const [city, country] = car.address.split(',').slice(1);
   const description = [
     city,
@@ -10,6 +12,11 @@ export const ListItem = ({ car }) => {
     car.id,
     car.functionalities[0],
   ];
+  const dispatch = useDispatch();
+  const onClick = () => {
+    dispatch(addCurrentCar(car));
+    openModal();
+  };
   return (
     <li className={s.item}>
       <img
@@ -22,18 +29,23 @@ export const ListItem = ({ car }) => {
           {car.make} <span className={s.model}>{car.model}</span>, {car.year}
           <span className={s.price}>{car.rentalPrice}</span>
         </h3>
-        <p className={s.desc}>
+        <ul className={s.desc}>
           {description.map((item, i) => (
-            <span
-              key={car.id * i}
+            <li
+              key={car.id + item + i}
               className={s.desc_item}
             >
               {item}
-            </span>
+            </li>
           ))}
-        </p>
+        </ul>
       </div>
-      <Button width="100%">Learn more</Button>
+      <Button
+        width="100%"
+        onClick={onClick}
+      >
+        Learn more
+      </Button>
     </li>
   );
 };
