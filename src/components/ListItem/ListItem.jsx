@@ -1,7 +1,7 @@
 import { Button } from '../Button/Button';
 import s from './ListItem.module.css';
 export const ListItem = ({ car }) => {
-  const [street, city, country] = car.address.split(',');
+  const [city, country] = car.address.split(',').slice(1);
   const description = [
     city,
     country,
@@ -23,12 +23,17 @@ export const ListItem = ({ car }) => {
           <span className={s.price}>{car.rentalPrice}</span>
         </h3>
         <p className={s.desc}>
-          {description.map((item) => (
-            <span className={s.desc_item}>{item}</span>
+          {description.map((item, i) => (
+            <span
+              key={car.id * i}
+              className={s.desc_item}
+            >
+              {item}
+            </span>
           ))}
         </p>
       </div>
-      <Button>Learn more</Button>
+      <Button width="100%">Learn more</Button>
     </li>
   );
 };

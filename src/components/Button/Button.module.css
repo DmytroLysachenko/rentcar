@@ -7,9 +7,12 @@
   line-height: 143%;
   color: #fff;
   border-radius: 12px;
-  padding: 14px 0;
+  padding: 14px;
+  max-height: 48px;
   background-color: #3470ff;
   transition: all 200ms ease-in-out;
+  align-self: flex-end;
+
   &:hover,
   &:focus {
     background-color: #0b44cd;

@@ -1,6 +1,5 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { error } from 'console';
-import { stat } from 'fs';
+
 import { fetchPageThunk } from './operations';
 
 const initialState = {
@@ -15,16 +14,16 @@ const catalogSlice = createSlice({
   initialState,
   reducers: {
     addCurrentCar(state, { payload }) {
-      state.catalog.currentCar = payload;
+      state.currentCar = payload;
     },
-    removeCurrentCar(state, { payload }) {
-      state.catalog.currentCar = null;
+    removeCurrentCar(state) {
+      state.currentCar = null;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
-        state.catalog.items = state.catalog.items.push(payload);
+        state.items = [...payload];
       })
       .addMatcher(isAnyOf(fetchPageThunk.pending), (state) => {
         state.loading = true;
@@ -40,3 +39,6 @@ const catalogSlice = createSlice({
       });
   },
 });
+
+export const catalogReducer = catalogSlice.reducer;
+export const { addCurrentCar, removeCurrentCar } = catalogSlice.actions;
