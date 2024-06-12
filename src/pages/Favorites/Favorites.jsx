@@ -6,19 +6,21 @@ import {
   selectCatalog,
   selectFavoriteCars,
 } from '../../redux/catalog/selectors';
+import { limitForFirstPage } from '../../helpers/mockAPI';
+import s from './Favorites.module.css';
 
 export const Favorites = () => {
   const dispatch = useDispatch();
   const catalog = useSelector(selectCatalog);
   useEffect(() => {
-    if (catalog.length === 12) {
+    if (catalog.length <= limitForFirstPage) {
       dispatch(fetchAllThunk());
     }
   }, []);
   const cars = useSelector(selectFavoriteCars);
   return (
     <div>
-      <h2>Your favorite offers:</h2>
+      <h2 className={s.heading}>Your favorite offers: </h2>
       <List cars={cars} />
     </div>
   );

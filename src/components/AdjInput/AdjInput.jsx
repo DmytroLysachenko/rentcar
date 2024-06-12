@@ -1,12 +1,13 @@
-import { useState } from 'react';
 import { numberDeFormat, numberFormat } from '../../helpers/numberFormat';
 import s from './AdjInput.module.css';
 import clsx from 'clsx';
-import { useSelector } from 'react-redux';
-import { selectFilter } from '../../redux/filter/selectors';
+
+import { getDefaultData } from '../../helpers/getDefaultData';
+import { inputDataChecker } from '../../helpers/inputDataChecker';
 
 export const AdjInput = ({ width, title }) => {
-  const filterValues = useSelector(selectFilter);
+  const defaultValues = getDefaultData('min', 'max');
+
   return (
     <label
       style={{ width }}
@@ -22,17 +23,16 @@ export const AdjInput = ({ width, title }) => {
           name="min"
           id="min"
           maxLength="6"
-          defaultValue={filterValues.min}
+          defaultValue={defaultValues.min}
           onChange={(event) => {
-            if (isNaN(Number(event.target.value))) {
-              event.target.value = event.target.value.slice(
-                0,
-                event.target.value.length - 2
-              );
-            }
+            inputDataChecker(event);
           }}
           onBlur={(event) => {
             event.target.value = numberFormat(event.target.value);
+            window.localStorage.setItem(
+              'min',
+              JSON.stringify(event.target.value)
+            );
           }}
           onFocus={(event) => {
             if (event.target.value) {
@@ -48,17 +48,16 @@ export const AdjInput = ({ width, title }) => {
           name="max"
           id="max"
           maxLength="6"
-          defaultValue={filterValues.max}
+          defaultValue={defaultValues.max}
           onChange={(event) => {
-            if (isNaN(Number(event.target.value))) {
-              event.target.value = event.target.value.slice(
-                0,
-                event.target.value.length - 2
-              );
-            }
+            inputDataChecker(event);
           }}
           onBlur={(event) => {
             event.target.value = numberFormat(event.target.value);
+            window.localStorage.setItem(
+              'max',
+              JSON.stringify(event.target.value)
+            );
           }}
           onFocus={(event) => {
             if (event.target.value) {
