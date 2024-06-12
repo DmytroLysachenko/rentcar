@@ -1,0 +1,80 @@
+.div {
+  margin: 50px auto;
+  max-width: 1184px;
+}
+
+.list {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.item {
+  background-color: rgba(240, 248, 255, 0.555);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  border-radius: 20px;
+  box-shadow: 8px 8px 24px 0px rgba(66, 68, 90, 0.34);
+  &:nth-of-type(2) {
+    background-color: rgba(250, 235, 215, 0.644);
+  }
+}
+
+.item .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  font-size: 40px;
+  width: 600px;
+  text-align: left;
+}
+
+.text {
+  display: block;
+  max-width: 600px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 111%;
+  color: #121417;
+}
+
+.key_image {
+  border: solid 1px gainsboro;
+  border-radius: 20px;
+}
+
+.quote {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  min-width: 800px;
+  margin: 0 auto;
+}
+
+.main_heading {
+  margin: 0 auto;
+  min-width: 800px;
+  display: block;
+  text-align: left;
+  font-size: 60px;
+}
+
+.main_text {
+  max-width: 800px;
+  display: block;
+  margin: 0 auto;
+}
+
+.heading_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-bottom: 80px;
+}

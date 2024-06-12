@@ -8,8 +8,9 @@ import {
 } from '../../redux/catalog/selectors';
 import { limitForFirstPage } from '../../helpers/mockAPI';
 import s from './Favorites.module.css';
+import { FavoritesEmpty } from '../../components/FavoritesEmpty/FavoritesEmpty';
 
-export const Favorites = () => {
+export const Favorites = ({ openModal }) => {
   const dispatch = useDispatch();
   const catalog = useSelector(selectCatalog);
   useEffect(() => {
@@ -20,8 +21,17 @@ export const Favorites = () => {
   const cars = useSelector(selectFavoriteCars);
   return (
     <div>
-      <h2 className={s.heading}>Your favorite offers: </h2>
-      <List cars={cars} />
+      {cars.length > 0 ? (
+        <>
+          <h2 className={s.heading}>Your favorite offers: </h2>
+          <List
+            cars={cars}
+            openModal={openModal}
+          />
+        </>
+      ) : (
+        <FavoritesEmpty />
+      )}
     </div>
   );
 };

@@ -2,9 +2,12 @@
   margin: 0 auto;
   max-width: 1184px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   min-height: 50px;
   margin-bottom: 50px;
+  background-color: rgba(240, 248, 255, 0.664);
+  border-radius: 0 0 20px 20px;
+  padding: 0 20px;
 }
 .logo {
   font-family: var(--font-family);
@@ -37,17 +40,19 @@
   width: 80%;
 }
 .link {
+  text-align: center;
   font-weight: 500;
   font-size: 18px;
   line-height: 111%;
   color: #121417;
   display: block;
-  background-color: rgb(215, 239, 250);
-  padding: 20px 40px;
+  background-color: #3470ff;
+  color: whitesmoke;
+  padding: 15px 30px;
   border-radius: 20px;
   transition: all 200ms ease-in-out;
 }
 .active {
   transform: scale(1.02);
-  background-color: rgba(215, 220, 250, 0.705);
+  background-color: #0b44cd;
 }

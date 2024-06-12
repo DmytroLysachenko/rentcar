@@ -9,6 +9,7 @@ import { ModalCar } from '../ModalCar/ModalCar';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFilteredCars } from '../../redux/catalog/selectors';
 import { fetchPageThunk } from '../../redux/catalog/operations';
+import { NotFound } from '../../pages/NotFound/NotFound';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -49,7 +50,11 @@ export const App = () => {
           />
           <Route
             path="/favorites"
-            element={<Favorites />}
+            element={<Favorites openModal={openModal} />}
+          />
+          <Route
+            path="*"
+            element={<NotFound />}
           />
         </Routes>
       </Layout>
