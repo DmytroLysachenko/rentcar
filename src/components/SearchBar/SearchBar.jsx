@@ -4,8 +4,7 @@ import { AdjInput } from '../AdjInput/AdjInput';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import s from './SearchBar.module.css';
-import { clearFilter, setFilter } from '../../redux/filter/slice';
-import { useEffect } from 'react';
+import { setFilter } from '../../redux/filter/slice';
 import { fetchAllThunk } from '../../redux/catalog/operations';
 
 const brands = [
@@ -82,7 +81,7 @@ export const SearchBar = () => {
         type="submit"
         width="136px"
       >
-        Submit
+        Search
       </Button>
     </form>
   );

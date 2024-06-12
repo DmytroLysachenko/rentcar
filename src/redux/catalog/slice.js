@@ -30,7 +30,7 @@ const catalogSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
-        state.items = [...state.items, ...payload];
+        state.items = [...payload];
       })
       .addMatcher(isAnyOf(fetchAllThunk.fulfilled), (state, { payload }) => {
         state.items = [...payload];
