@@ -4,7 +4,9 @@ import { AdjInput } from '../AdjInput/AdjInput';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import s from './SearchBar.module.css';
-import { fetchFilteredThunk } from '../../redux/catalog/operations';
+import { clearFilter, setFilter } from '../../redux/filter/slice';
+import { useEffect } from 'react';
+import { fetchAllThunk } from '../../redux/catalog/operations';
 
 const brands = [
   'Buick',
@@ -31,8 +33,9 @@ const brands = [
   'Land',
 ];
 
-export const SearchBar = ({ setLastPage }) => {
+export const SearchBar = () => {
   const dispatch = useDispatch();
+
   return (
     <form
       className={s.form}
@@ -41,12 +44,20 @@ export const SearchBar = ({ setLastPage }) => {
         const formData = new FormData(event.target);
         const filterValues = {
           brand: formData.get('brand'),
-          price: formData.get('perHour'),
+          perHour: formData.get('perHour'),
           min: formData.get('min'),
           max: formData.get('max'),
         };
-        dispatch(fetchFilteredThunk(filterValues));
-        setLastPage(false);
+        if (
+          filterValues.brand ||
+          filterValues.perHour ||
+          filterValues.min ||
+          filterValues.max
+        ) {
+          console.log(filterValues);
+          dispatch(fetchAllThunk());
+          dispatch(setFilter(filterValues));
+        }
       }}
     >
       <Input

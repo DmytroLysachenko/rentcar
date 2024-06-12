@@ -26,31 +26,6 @@ export const fetchPageThunk = createAsyncThunk(
   }
 );
 
-export const fetchFilteredThunk = createAsyncThunk(
-  'catalog/fetchFiltered',
-  async ({ brand, price, min, max }, thunkAPI) => {
-    try {
-      const { data } = await mockAPI.get('/adverts');
-      let result = [...data];
-      if (brand !== 'Enter the text') {
-        result = [...result.filter((car) => car.make === brand)];
-      }
-      if (price !== 'To $') {
-        result = [...result.filter((car) => car.rentalPrice <= price)];
-      }
-      if (min !== '') {
-        result = [...result.filter((car) => car.mileage >= min)];
-      }
-      if (max !== '') {
-        result = [...result.filter((car) => car.mileage <= max)];
-      }
-      return result;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const fetchByIdThunk = createAsyncThunk(
   'catalog/fetchById',
   async (id, thunkAPI) => {

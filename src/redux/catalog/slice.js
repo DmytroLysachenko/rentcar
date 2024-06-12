@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
-import { fetchFilteredThunk, fetchPageThunk } from './operations';
+import { fetchAllThunk, fetchPageThunk } from './operations';
 
 const initialState = {
   items: [],
@@ -32,12 +32,9 @@ const catalogSlice = createSlice({
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
         state.items = [...state.items, ...payload];
       })
-      .addMatcher(
-        isAnyOf(fetchFilteredThunk.fulfilled),
-        (state, { payload }) => {
-          state.items = [...payload];
-        }
-      )
+      .addMatcher(isAnyOf(fetchAllThunk.fulfilled), (state, { payload }) => {
+        state.items = [...payload];
+      })
 
       .addMatcher(isAnyOf(fetchPageThunk.pending), (state) => {
         state.loading = true;

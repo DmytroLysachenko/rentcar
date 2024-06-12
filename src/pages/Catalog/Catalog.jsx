@@ -3,21 +3,15 @@ import { List } from '../../components/List/List';
 
 import { LoadMore } from '../../components/LoadMore/LoadMore';
 
-export const Catalog = ({
-  openModal,
-  nextPage,
-  cars,
-  isLastPage,
-  setLastPage,
-}) => {
+export const Catalog = ({ openModal, cars }) => {
   return (
     <>
-      <SearchBar setLastPage={setLastPage} />
+      <SearchBar />
       <List
         openModal={openModal}
         cars={cars}
       />
-      {!isLastPage && <LoadMore nextPage={nextPage} />}
+      {cars.length === 12 && <LoadMore />}
     </>
   );
 };
