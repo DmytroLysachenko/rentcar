@@ -2,12 +2,18 @@ import { NavLink } from 'react-router-dom';
 import s from './Header.module.css';
 import clsx from 'clsx';
 import logo from '/logo.png';
+import { motion } from 'framer-motion';
 export const Header = () => {
   const buildLinkClass = ({ isActive }) => {
     return clsx(s.link, isActive && s.active);
   };
   return (
-    <nav className={s.nav}>
+    <motion.nav
+      initial={{ transform: 'translateY(-100%)' }}
+      animate={{ transform: 'translateY(0)' }}
+      transition={{ duration: 0.3 }}
+      className={s.nav}
+    >
       <NavLink
         className={s.logoLink}
         to="/"
@@ -45,6 +51,6 @@ export const Header = () => {
           </NavLink>
         </li>
       </ul>
-    </nav>
+    </motion.nav>
   );
 };

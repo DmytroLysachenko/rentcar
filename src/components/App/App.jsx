@@ -10,6 +10,7 @@ import { NotFound } from '../../pages/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from '../Loader/Loader';
+import { ScrollUp } from '../ScrollUp/ScrollUp';
 
 const Home = React.lazy(() => import('../../pages/Home/Home'));
 const Favorites = React.lazy(() => import('../../pages/Favorites/Favorites'));
@@ -72,6 +73,7 @@ export const App = () => {
           </Routes>
         </Suspense>
       </Layout>
+      <ScrollUp />
     </>
   );
 };
