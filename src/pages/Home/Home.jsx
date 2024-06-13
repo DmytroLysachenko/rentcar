@@ -13,7 +13,9 @@ export const Home = () => {
           ensure you experience exceptional service and convenience thorough the
           drive.
         </p>
-        <q className={s.quote}>- "Helping you to find the best car to rent"</q>
+        <q className={s.quote}>
+          - &quot;Helping you to find the best car to rent&quot;
+        </q>
       </div>
       <ul className={s.list}>
         <li className={s.item}>
