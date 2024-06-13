@@ -27,17 +27,16 @@ const Catalog = ({ openModal }) => {
 
   useEffect(() => {
     dispatch(clearCatalog());
-  }, []);
-
-  useEffect(() => {
-    dispatch(fetchPageThunk(currentPage));
-  }, [currentPage, dispatch]);
+    setCurrentPage(1);
+  }, [filterValues]);
 
   useEffect(() => {
     if (Object.values(filterValues).length > 0) {
       dispatch(fetchAllThunk());
+      return;
     }
-  }, [dispatch, filterValues]);
+    dispatch(fetchPageThunk(currentPage));
+  }, [currentPage, dispatch, filterValues]);
 
   return (
     <>
