@@ -30,10 +30,8 @@ const Catalog = ({ openModal }) => {
   }, []);
 
   useEffect(() => {
-    if (!lastPage && !Object.values(filterValues).length) {
-      dispatch(fetchPageThunk(currentPage));
-    }
-  }, [currentPage, dispatch, lastPage, filterValues]);
+    dispatch(fetchPageThunk(currentPage));
+  }, [currentPage, dispatch]);
 
   useEffect(() => {
     if (Object.values(filterValues).length > 0) {

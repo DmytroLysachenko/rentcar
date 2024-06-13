@@ -33,6 +33,7 @@ const catalogSlice = createSlice({
     },
     clearCatalog(state) {
       state.items = [];
+      state.lastPage = false;
     },
   },
   extraReducers: (builder) => {
