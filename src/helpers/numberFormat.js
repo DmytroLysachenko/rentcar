@@ -4,6 +4,5 @@ export const numberFormat = (num) => {
 
 export const numberDeFormat = (str) => {
   const result = str.split(',');
-  console.log(result.join(''));
   return Number(result.join(''));
 };
