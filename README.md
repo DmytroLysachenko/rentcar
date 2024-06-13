@@ -15,20 +15,33 @@ Welcome to the Car Rental Website! This project allows users to search and filte
 - **Backend**: Node.js.
 - **Database**: Mock.api
 
+## Libraries Used
+
+- **react-redux**:"^5.2.1" "^9.1.2".
+- **@reduxjs/toolkit**:"^5.2.1" "^2.2.5".
+- **axios**:"^5.2.1" "^1.7.2".
+- **clsx**:"^5.2.1" "^2.1.1".
+- **framer-motion**:"^5.2.1" '^11.2.10'.
+- **react-icons**:"^5.2.1" "^5.2.1".
+- **react-loader-spinner**:"^5.2.1" "^6.1.6".
+- **react-router-dom**:"^5.2.1" "^6.23.1".
+- **react-select**:"^5.2.1" "^5.8.0".
+- **react-toastify**:"^5.2.1" "^10.0.5".
+- **redux-persist**:"^5.2.1" "^6.0.0".
+
 ## Installation
 
 ### Prerequisites
 
 - Node.js
-- Mock.api
 
 ### Steps
 
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/yourusername/car-rental-website.git
-   cd car-rental-website
+   git clone https://github.com/DmytroLysachenko/rentcar.git
+   cd rentcar
    ```
 
 2. **Install dependencies**:
