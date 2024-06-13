@@ -9,31 +9,7 @@ import { fetchAllThunk } from '../../redux/catalog/operations';
 import { toast } from 'react-toastify';
 import { numberDeFormat } from '../../helpers/numberFormat';
 import { motion } from 'framer-motion';
-
-const brands = [
-  'Buick',
-  'Volvo',
-  'HUMMER',
-  'Subaru',
-  'Mitsubishi',
-  'Nissan',
-  'Lincoln',
-  'GMC',
-  'Hyundai',
-  'MINI',
-  'Bentley',
-  'Mercedes-Benz',
-  'Aston Martin',
-  'Pontiac',
-  'Lamborghini',
-  'Audi',
-  'BMW',
-  'Chevrolet',
-  'Mercedes-Benz',
-  'Chrysler',
-  'Kia',
-  'Land',
-];
+import { brands } from '../../helpers/brands';
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
