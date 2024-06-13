@@ -3,7 +3,6 @@ import { selectCurrentCar } from '../../redux/catalog/selectors';
 import s from './ModalCar.module.css';
 import clsx from 'clsx';
 import { numberFormat } from '../../helpers/numberFormat';
-import { Button } from '../Button/Button';
 import { IoClose } from 'react-icons/io5';
 
 export const ModalCar = ({ closeModal }) => {
@@ -101,7 +100,12 @@ export const ModalCar = ({ closeModal }) => {
           Price: <span className={s.accent}>{car.rentalPrice.slice(1)}$</span>
         </li>
       </ul>
-      <Button width="168px">Rental car</Button>
+      <a
+        className={s.link}
+        href="tel:+380730000000"
+      >
+        Rental car
+      </a>
     </div>
   );
 };
