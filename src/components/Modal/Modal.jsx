@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import s from './Modal.module.css';
 import { motion } from 'framer-motion';
-const Modal = ({ children, onClose }) => {
+export const Modal = ({ children, onClose }) => {
   const handleBackDropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -32,5 +32,3 @@ const Modal = ({ children, onClose }) => {
     </motion.div>
   );
 };
-
-export default Modal;

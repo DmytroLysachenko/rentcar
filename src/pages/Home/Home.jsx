@@ -4,7 +4,7 @@ import image3 from '/image3.png';
 import s from './Home.module.css';
 import clsx from 'clsx';
 import { motion } from 'framer-motion';
-export const Home = () => {
+const Home = () => {
   return (
     <div className={s.div}>
       <div className={s.heading_wrapper}>
@@ -102,13 +102,27 @@ export const Home = () => {
           </div>
         </motion.li>
       </ul>
-      <h2 className={s.bottom_heading}>
+      <motion.h2
+        className={s.bottom_heading}
+        initial={{ opacity: 0, transform: 'translateX(50%)' }}
+        whileInView={{ opacity: 1, transform: 'translateX(0)' }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
         Hopefully our web-site will keep You{' '}
         <span className={s.accent}>satisfied</span> with rental experience!
-      </h2>
-      <h3 className={s.bottom_sub_heading}>
+      </motion.h2>
+      <motion.h3
+        className={s.bottom_sub_heading}
+        initial={{ opacity: 0, transform: 'translateX(50%)' }}
+        whileInView={{ opacity: 1, transform: 'translateX(0)' }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <span className={s.accent}>Thank You</span> for choosing CarRent!
-      </h3>
+      </motion.h3>{' '}
     </div>
   );
 };
+
+export default Home;

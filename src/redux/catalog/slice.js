@@ -1,6 +1,8 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 import { fetchAllThunk, fetchPageThunk } from './operations';
+import { toast } from 'react-toastify';
+import { limitForPage } from '../../helpers/mockAPI';
 
 const initialState = {
   items: [],
@@ -8,6 +10,7 @@ const initialState = {
   error: null,
   currentCar: null,
   favoritesId: [],
+  lastPage: null,
 };
 
 const catalogSlice = createSlice({
@@ -26,27 +29,45 @@ const catalogSlice = createSlice({
     removeFavoriteCar(state, { payload }) {
       state.favoritesId = state.favoritesId.filter((id) => id !== payload);
     },
+    clearCatalog(state) {
+      state.items = [];
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPageThunk.fulfilled, (state, { payload }) => {
-        state.items = [...payload];
+        if (payload.length > 0) {
+          state.items.push(...payload);
+        }
+        if (payload.length === 0 || payload.length < limitForPage) {
+          state.lastPage = true;
+        }
       })
       .addMatcher(isAnyOf(fetchAllThunk.fulfilled), (state, { payload }) => {
-        state.items = [...payload];
+        if (payload.length > 0) {
+          state.lastPage = true;
+          state.items = [...payload];
+        }
       })
 
-      .addMatcher(isAnyOf(fetchPageThunk.pending), (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addMatcher(isAnyOf(fetchPageThunk.fulfilled), (state) => {
-        state.loading = false;
-        state.error = null;
-      })
+      .addMatcher(
+        isAnyOf(fetchPageThunk.pending, fetchAllThunk.pending),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(fetchPageThunk.fulfilled, fetchAllThunk.fulfilled),
+        (state) => {
+          state.loading = false;
+          state.error = null;
+        }
+      )
       .addMatcher(isAnyOf(fetchPageThunk.rejected), (state) => {
         state.loading = false;
         state.error = true;
+        toast.error('Something went wrong!');
       });
   },
 });
@@ -57,4 +78,5 @@ export const {
   removeCurrentCar,
   addFavoriteCar,
   removeFavoriteCar,
+  clearCatalog,
 } = catalogSlice.actions;

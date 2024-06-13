@@ -1,18 +1,21 @@
-import { useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { Layout } from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
-import { Home } from '../../pages/Home/Home';
-import { Favorites } from '../../pages/Favorites/Favorites';
-import { Catalog } from '../../pages/Catalog/Catalog';
-import Modal from '../Modal/Modal';
+
+import { Modal } from '../Modal/Modal';
 import { ModalCar } from '../ModalCar/ModalCar';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectFilteredCars } from '../../redux/catalog/selectors';
-import { fetchPageThunk } from '../../redux/catalog/operations';
 import { NotFound } from '../../pages/NotFound/NotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from '../Loader/Loader';
+
+const Home = React.lazy(() => import('../../pages/Home/Home'));
+const Favorites = React.lazy(() => import('../../pages/Favorites/Favorites'));
+const Catalog = React.lazy(() => import('../../pages/Catalog/Catalog'));
 
 export const App = () => {
-  const dispatch = useDispatch();
   const [isModalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -20,9 +23,6 @@ export const App = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  useEffect(() => {
-    dispatch(fetchPageThunk(1));
-  }, []);
 
   const cars = useSelector(selectFilteredCars);
 
@@ -33,30 +33,44 @@ export const App = () => {
           <ModalCar closeModal={closeModal} />
         </Modal>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
       <Layout>
-        <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/catalog"
-            element={
-              <Catalog
-                cars={cars}
-                openModal={openModal}
-              />
-            }
-          />
-          <Route
-            path="/favorites"
-            element={<Favorites openModal={openModal} />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route
+              path="/"
+              element={<Home />}
+            />
+            <Route
+              path="/catalog"
+              element={
+                <Catalog
+                  cars={cars}
+                  openModal={openModal}
+                />
+              }
+            />
+            <Route
+              path="/favorites"
+              element={<Favorites openModal={openModal} />}
+            />
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+          </Routes>
+        </Suspense>
       </Layout>
     </>
   );

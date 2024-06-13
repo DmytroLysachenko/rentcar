@@ -3,25 +3,27 @@ import { List } from '../../components/List/List';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllThunk } from '../../redux/catalog/operations';
 import {
-  selectCatalog,
   selectFavoriteCars,
+  selectLoading,
 } from '../../redux/catalog/selectors';
-import { limitForFirstPage } from '../../helpers/mockAPI';
+
 import s from './Favorites.module.css';
 import { FavoritesEmpty } from '../../components/FavoritesEmpty/FavoritesEmpty';
+import { Loader } from '../../components/Loader/Loader';
 
-export const Favorites = ({ openModal }) => {
+const Favorites = ({ openModal }) => {
   const dispatch = useDispatch();
-  const catalog = useSelector(selectCatalog);
+  const loading = useSelector(selectLoading);
+
   useEffect(() => {
-    if (catalog.length <= limitForFirstPage) {
-      dispatch(fetchAllThunk());
-    }
-  }, []);
+    dispatch(fetchAllThunk());
+  }, [dispatch]);
   const cars = useSelector(selectFavoriteCars);
   return (
     <div>
-      {cars.length > 0 ? (
+      {loading ? (
+        <Loader />
+      ) : cars.length > 0 ? (
         <>
           <h2 className={s.heading}>Your favorite offers: </h2>
           <List
@@ -35,3 +37,5 @@ export const Favorites = ({ openModal }) => {
     </div>
   );
 };
+
+export default Favorites;

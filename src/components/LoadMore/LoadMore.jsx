@@ -1,14 +1,11 @@
-import { useDispatch } from 'react-redux';
 import s from './LoadMore.module.css';
-import { fetchAllThunk } from '../../redux/catalog/operations';
 
-export const LoadMore = () => {
-  const dispatch = useDispatch();
+export const LoadMore = ({ nextPage }) => {
   return (
     <button
       type="button"
       className={s.button}
-      onClick={() => dispatch(fetchAllThunk())}
+      onClick={() => nextPage()}
     >
       Load more
     </button>

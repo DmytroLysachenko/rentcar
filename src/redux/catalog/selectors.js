@@ -1,12 +1,12 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { selectFilter } from '../filter/selectors';
-import { numberDeFormat } from '../../helpers/numberFormat';
 
 export const selectCatalog = (state) => state.catalog.items;
 export const selectLoading = (state) => state.catalog.loading;
 export const selectError = (state) => state.catalog.error;
 export const selectCurrentCar = (state) => state.catalog.currentCar;
 export const selectFavoriteCarsIds = (state) => state.catalog.favoritesId;
+export const selectLastPage = (state) => state.catalog.lastPage;
 
 export const selectFavoriteCars = createSelector(
   [selectCatalog, selectFavoriteCarsIds],
@@ -28,10 +28,10 @@ export const selectFilteredCars = createSelector(
       ];
     }
     if (min) {
-      result = [...result.filter((car) => car.mileage >= numberDeFormat(min))];
+      result = [...result.filter((car) => car.mileage >= min)];
     }
     if (max) {
-      result = [...result.filter((car) => car.mileage <= numberDeFormat(max))];
+      result = [...result.filter((car) => car.mileage <= max)];
     }
     return result;
   }

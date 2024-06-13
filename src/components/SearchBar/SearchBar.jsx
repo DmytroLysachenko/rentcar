@@ -4,8 +4,10 @@ import { AdjInput } from '../AdjInput/AdjInput';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import s from './SearchBar.module.css';
-import { setFilter } from '../../redux/filter/slice';
+import { clearFilter, setFilter } from '../../redux/filter/slice';
 import { fetchAllThunk } from '../../redux/catalog/operations';
+import { toast } from 'react-toastify';
+import { numberDeFormat } from '../../helpers/numberFormat';
 
 const brands = [
   'Buick',
@@ -34,30 +36,33 @@ const brands = [
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
+  const onSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const filterValues = {
+      brand: formData.get('brand'),
+      perHour: Number(formData.get('perHour')),
+      min: numberDeFormat(formData.get('min')),
+      max: numberDeFormat(formData.get('max')),
+    };
+    const { brand, perHour, min, max } = filterValues;
+    if (min !== 0 && max !== 0 && min > max) {
+      toast.error('Min Mileage cannot be bigger than Max!');
+      return;
+    }
+    if (
+      (brand || perHour || min || max) &&
+      !(min !== 0 && max !== 0 && min > max)
+    ) {
+      dispatch(fetchAllThunk());
+      dispatch(setFilter(filterValues));
+    } else dispatch(clearFilter());
+  };
 
   return (
     <form
       className={s.form}
-      onSubmit={(event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const filterValues = {
-          brand: formData.get('brand'),
-          perHour: formData.get('perHour'),
-          min: formData.get('min'),
-          max: formData.get('max'),
-        };
-        if (
-          filterValues.brand ||
-          filterValues.perHour ||
-          filterValues.min ||
-          filterValues.max
-        ) {
-          console.log(filterValues);
-          dispatch(fetchAllThunk());
-          dispatch(setFilter(filterValues));
-        }
-      }}
+      onSubmit={(event) => onSubmit(event)}
     >
       <Input
         title="Car brand"

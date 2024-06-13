@@ -4,7 +4,7 @@ import s from './ModalCar.module.css';
 import clsx from 'clsx';
 import { numberFormat } from '../../helpers/numberFormat';
 import { IoClose } from 'react-icons/io5';
-
+import image from '/noCar.png';
 export const ModalCar = ({ closeModal }) => {
   const car = useSelector(selectCurrentCar);
   const [city, country] = car.address.split(',').slice(1);
@@ -31,7 +31,7 @@ export const ModalCar = ({ closeModal }) => {
       </button>
       <img
         className={s.img}
-        src={car.img}
+        src={car.img ?? car.photoLink ?? image}
         alt={car.desc}
       />
       <div className={s.description_wrapper}>

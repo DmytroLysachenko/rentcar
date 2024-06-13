@@ -7,7 +7,7 @@ import {
   removeFavoriteCar,
 } from '../../redux/catalog/slice';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
-
+import image from '/noCar.png';
 export const ListItem = ({ car, isLiked, openModal }) => {
   const [city, country] = car.address.split(',').slice(1);
   const description = [
@@ -50,7 +50,7 @@ export const ListItem = ({ car, isLiked, openModal }) => {
       </button>
       <img
         className={s.img}
-        src={car.img}
+        src={car.img ?? car.photoLink ?? image}
         alt={car.desc}
       />
       <div className={s.description_wrapper}>

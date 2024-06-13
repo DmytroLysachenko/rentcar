@@ -8,6 +8,15 @@ import { inputDataChecker } from '../../helpers/inputDataChecker';
 export const AdjInput = ({ width, title }) => {
   const defaultValues = getDefaultData('min', 'max');
 
+  const onChange = (event, value) => {
+    const number = numberDeFormat(event.target.value);
+    if (number !== 0) {
+      event.target.value = numberFormat(number);
+    } else {
+      event.target.value = '';
+    }
+    window.localStorage.setItem(value, JSON.stringify(event.target.value));
+  };
   return (
     <label
       style={{ width }}
@@ -22,22 +31,11 @@ export const AdjInput = ({ width, title }) => {
           type="text"
           name="min"
           id="min"
-          maxLength="6"
+          maxLength="7"
           defaultValue={defaultValues.min}
           onChange={(event) => {
             inputDataChecker(event);
-          }}
-          onBlur={(event) => {
-            event.target.value = numberFormat(event.target.value);
-            window.localStorage.setItem(
-              'min',
-              JSON.stringify(event.target.value)
-            );
-          }}
-          onFocus={(event) => {
-            if (event.target.value) {
-              event.target.value = numberDeFormat(event.target.value);
-            }
+            onChange(event, 'min');
           }}
         />
 
@@ -47,22 +45,11 @@ export const AdjInput = ({ width, title }) => {
           type="text"
           name="max"
           id="max"
-          maxLength="6"
+          maxLength="7"
           defaultValue={defaultValues.max}
           onChange={(event) => {
             inputDataChecker(event);
-          }}
-          onBlur={(event) => {
-            event.target.value = numberFormat(event.target.value);
-            window.localStorage.setItem(
-              'max',
-              JSON.stringify(event.target.value)
-            );
-          }}
-          onFocus={(event) => {
-            if (event.target.value) {
-              event.target.value = numberDeFormat(event.target.value);
-            }
+            onChange(event, 'max');
           }}
         />
       </div>
