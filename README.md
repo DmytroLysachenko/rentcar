@@ -17,17 +17,17 @@ Welcome to the Car Rental Website! This project allows users to search and filte
 
 ## Libraries Used
 
-- **react-redux**:"^5.2.1" "^9.1.2".
-- **@reduxjs/toolkit**:"^5.2.1" "^2.2.5".
-- **axios**:"^5.2.1" "^1.7.2".
-- **clsx**:"^5.2.1" "^2.1.1".
-- **framer-motion**:"^5.2.1" '^11.2.10'.
-- **react-icons**:"^5.2.1" "^5.2.1".
-- **react-loader-spinner**:"^5.2.1" "^6.1.6".
-- **react-router-dom**:"^5.2.1" "^6.23.1".
-- **react-select**:"^5.2.1" "^5.8.0".
-- **react-toastify**:"^5.2.1" "^10.0.5".
-- **redux-persist**:"^5.2.1" "^6.0.0".
+- **react-redux**: ver: "^9.1.2".
+- **@reduxjs/toolkit**: ver: "^2.2.5".
+- **axios**: ver: "^1.7.2".
+- **clsx**: ver: "^2.1.1".
+- **framer-motion**: ver: '^11.2.10'.
+- **react-icons**: ver: "^5.2.1".
+- **react-loader-spinner**: ver: "^6.1.6".
+- **react-router-dom**: ver: "^6.23.1".
+- **react-select**: ver: "^5.8.0".
+- **react-toastify**: ver: "^10.0.5".
+- **redux-persist**: ver: "^6.0.0".
 
 ## Installation
 

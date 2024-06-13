@@ -4,8 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Modal } from '../Modal/Modal';
 import { ModalCar } from '../ModalCar/ModalCar';
-import { useSelector } from 'react-redux';
-import { selectFilteredCars } from '../../redux/catalog/selectors';
+
 import { NotFound } from '../../pages/NotFound/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,8 +23,6 @@ export const App = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  const cars = useSelector(selectFilteredCars);
 
   return (
     <>
@@ -55,12 +52,7 @@ export const App = () => {
             />
             <Route
               path="/catalog"
-              element={
-                <Catalog
-                  cars={cars}
-                  openModal={openModal}
-                />
-              }
+              element={<Catalog openModal={openModal} />}
             />
             <Route
               path="/favorites"
