@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { AnimatePresence } from 'framer-motion';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
@@ -14,9 +13,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       persistor={persistor}
     >
       <BrowserRouter>
-        <AnimatePresence>
-          <App />
-        </AnimatePresence>
+        <App />
       </BrowserRouter>
     </PersistGate>
   </Provider>

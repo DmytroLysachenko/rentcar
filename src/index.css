@@ -3,6 +3,7 @@
 @import url('./css/react-select.css');
 body {
   font-family: var(--font-family);
+  overflow-x: hidden;
 }
 button {
   font-family: var(--font-family);
