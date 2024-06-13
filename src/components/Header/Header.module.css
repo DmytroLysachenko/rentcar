@@ -19,10 +19,17 @@
   justify-content: center;
 }
 .img {
+  background-color: rgba(175, 173, 173, 0.322);
+  border-color: #0b44cd;
+  border: solid 1px;
+  padding: 0 5px;
   display: block;
+  border-radius: 50%;
   min-width: 50px;
 }
 .logoLink {
+  border-radius: 50%;
+  overflow: hidden;
   padding: 20px;
   display: flex;
   flex-direction: column;
