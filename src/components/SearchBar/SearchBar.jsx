@@ -8,6 +8,7 @@ import { clearFilter, setFilter } from '../../redux/filter/slice';
 import { fetchAllThunk } from '../../redux/catalog/operations';
 import { toast } from 'react-toastify';
 import { numberDeFormat } from '../../helpers/numberFormat';
+import { motion } from 'framer-motion';
 
 const brands = [
   'Buick',
@@ -60,9 +61,12 @@ export const SearchBar = () => {
   };
 
   return (
-    <form
+    <motion.form
       className={s.form}
       onSubmit={(event) => onSubmit(event)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
     >
       <Input
         title="Car brand"
@@ -88,6 +92,6 @@ export const SearchBar = () => {
       >
         Search
       </Button>
-    </form>
+    </motion.form>
   );
 };

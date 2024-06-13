@@ -1,9 +1,15 @@
 import { Link } from 'react-router-dom';
 import s from './FavoritesEmpty.module.css';
 import image from '/cars.png';
+import { motion } from 'framer-motion';
 export const FavoritesEmpty = () => {
   return (
-    <div className={s.div}>
+    <motion.div
+      className={s.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <h2 className={s.heading}>Still nothing here, lets change it!</h2>
       <Link
         className={s.link}
@@ -15,6 +21,6 @@ export const FavoritesEmpty = () => {
         src={image}
         alt="cars"
       />
-    </div>
+    </motion.div>
   );
 };

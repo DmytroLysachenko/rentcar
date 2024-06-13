@@ -8,6 +8,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { fetchAllThunk, fetchPageThunk } from '../../redux/catalog/operations';
 import { selectFilter } from '../../redux/filter/selectors';
+import { motion } from 'framer-motion';
 
 const Catalog = ({ openModal, cars }) => {
   const loading = useSelector(selectLoading);

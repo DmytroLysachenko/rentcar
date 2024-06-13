@@ -6,7 +6,12 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 const Home = () => {
   return (
-    <div className={s.div}>
+    <motion.div
+      className={s.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className={s.heading_wrapper}>
         <h1 className={clsx(s.main_heading, s.heading)}>CarRent</h1>
         <p className={clsx(s.main_text, s.text)}>
@@ -121,7 +126,7 @@ const Home = () => {
       >
         <span className={s.accent}>Thank You</span> for choosing CarRent!
       </motion.h3>{' '}
-    </div>
+    </motion.div>
   );
 };
 

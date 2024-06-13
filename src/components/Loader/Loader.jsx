@@ -1,8 +1,15 @@
 import { Circles } from 'react-loader-spinner';
 import s from './Loader.module.css';
+import { motion } from 'framer-motion';
 export const Loader = () => {
   return (
-    <div className={s.div}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      exit={{ opacity: 0 }}
+      className={s.div}
+    >
       <Circles
         height="80"
         width="80"
@@ -12,6 +19,6 @@ export const Loader = () => {
         wrapperClass=""
         visible={true}
       />
-    </div>
+    </motion.div>
   );
 };
