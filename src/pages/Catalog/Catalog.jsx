@@ -12,6 +12,7 @@ import { Loader } from '../../components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import { fetchAllThunk, fetchPageThunk } from '../../redux/catalog/operations';
 import { selectFilter } from '../../redux/filter/selectors';
+import { clearCatalog } from '../../redux/catalog/slice';
 
 const Catalog = ({ openModal }) => {
   const loading = useSelector(selectLoading);
@@ -23,6 +24,11 @@ const Catalog = ({ openModal }) => {
   const nextPage = () => {
     setCurrentPage((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    dispatch(clearCatalog());
+  }, []);
+
   useEffect(() => {
     if (!lastPage && !Object.values(filterValues).length) {
       dispatch(fetchPageThunk(currentPage));

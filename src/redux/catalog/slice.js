@@ -31,6 +31,9 @@ const catalogSlice = createSlice({
       state.favoritesId = state.favoritesId.filter((id) => id !== payload);
       toast.success(`Car id:${payload} removed from favorites!`);
     },
+    clearCatalog(state) {
+      state.items = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,4 +80,5 @@ export const {
   removeCurrentCar,
   addFavoriteCar,
   removeFavoriteCar,
+  clearCatalog,
 } = catalogSlice.actions;
