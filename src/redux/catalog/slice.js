@@ -25,9 +25,11 @@ const catalogSlice = createSlice({
     },
     addFavoriteCar(state, { payload }) {
       state.favoritesId.push(payload);
+      toast.success(`Car id:${payload} added to favorites!`);
     },
     removeFavoriteCar(state, { payload }) {
       state.favoritesId = state.favoritesId.filter((id) => id !== payload);
+      toast.success(`Car id:${payload} removed from favorites!`);
     },
     clearCatalog(state) {
       state.items = [];

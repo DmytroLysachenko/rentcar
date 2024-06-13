@@ -33,7 +33,10 @@ export const SearchBar = () => {
     ) {
       dispatch(fetchAllThunk());
       dispatch(setFilter(filterValues));
-    } else dispatch(clearFilter());
+    } else {
+      toast.success('No values entered - filter reseted!');
+      dispatch(clearFilter());
+    }
   };
 
   return (
