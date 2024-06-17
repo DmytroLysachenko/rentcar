@@ -27,12 +27,12 @@ const Catalog = ({ openModal }) => {
 
   useEffect(() => {
     dispatch(clearCatalog());
-    setCurrentPage(1);
   }, [filterValues]);
 
   useEffect(() => {
     if (Object.values(filterValues).length > 0) {
       dispatch(fetchAllThunk());
+      setCurrentPage(1);
       return;
     }
     dispatch(fetchPageThunk(currentPage));
